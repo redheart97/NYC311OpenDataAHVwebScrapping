@@ -24,25 +24,22 @@
     </head>
     
     <body>
-        <div class="jumbotron" style = "padding:4%"  >
-            <h1>
-                Custom Queries on NYC311OpenData
-            </h1>
+        <div class="jumbotron" style = "padding:2%"; >
+            <h1> Custom Queries on NYC311OpenData </h1>
+            <p> 
+                <font size = 1>
+                Lists all the 311 after hours construction reports (NM1) from specified start date to specified end date within specified Community Destrict. <br> 
+                <i>At this time the search radius is not used. Coming soon: Functionality for displaying all AHV issued for buildings in the immediate vicinity 
+                and within two days (either side) of the 311call. </i>            
+                </font> 
+            </p>
         </div>
 
         <div class="container" style = "margin-top:3%">
-            <p class ="leftIndent">
-                Start date for querying 311CallData:  <tab1> <input class ="inputStyle" id="startDate"  type="date"> </tab1>
-            </p>
-            <p class ="leftIndent">
-                End date for querying 311CallData: <tab2> <input class ="inputStyle" id="endDate"  type="date"> </tab2>
-            </p>
-            <p class ="leftIndent">
-                How many meters would you like the search radius to be: <tab3> <input class ="inputStyle" id="searchRadius"  value = "400" type="number"> </tab3>
-            </p>
-            <p class="leftIndent">
-                What community board would you like to filter on: <tab4> <input class ="inputStyle" id="communityBoard"  value = "02 MANHATTAN" type="text"> </tab4>
-            </p>
+            <p class ="leftIndent"> Start date for querying 311CallData:  <tab1> <input class ="inputStyle" id="startDate"  type="date"> </tab1> </p>
+            <p class ="leftIndent"> End date for querying 311CallData: <tab2> <input class ="inputStyle" id="endDate"  type="date"> </tab2> </p>
+            <p class ="leftIndent"> How many meters would you like the search radius to be: <tab3> <input class ="inputStyle" id="searchRadius"  value = "400" type="number"> </tab3> </p>
+            <p class ="leftIndent"> What community board would you like to filter on: <tab4> <input class ="inputStyle" id="communityBoard"  value = "02 MANHATTAN" type="text"> </tab4> </p>
             {% csrf_token %}
             <tab5> <button class = "submit" id = "submitButton" type = "button"> Search </button> </tab5>
         </div>
