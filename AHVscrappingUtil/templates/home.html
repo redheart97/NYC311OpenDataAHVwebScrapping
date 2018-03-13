@@ -1,0 +1,78 @@
+
+<!-- Bootstrap-->
+<!DOCTYPE html>
+<html>
+    <head> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"> </script>
+        
+        <style type="text/css">
+            p.leftIndent{ padding-left: 1.8em }
+           
+    
+            tab1 { padding-left: 15em; }
+            tab2 { padding-left: 15.35em; }
+            tab3 { padding-left: 5.5em; }
+            tab4 { padding-left: 8.45em; }
+            tab5 { padding-left: 38.8em; }
+
+            .inputStyle {width: 10em}
+
+        </style>
+
+    </head>
+    
+    <body>
+        <div class="jumbotron" style = "padding:4%"  >
+            <h1>
+                Custom Queries on NYC311OpenData
+            </h1>
+        </div>
+
+        <div class="container" style = "margin-top:3%">
+            <p class ="leftIndent">
+                Start date for querying 311CallData:  <tab1> <input class ="inputStyle" id="startDate"  type="date"> </tab1>
+            </p>
+            <p class ="leftIndent">
+                End date for querying 311CallData: <tab2> <input class ="inputStyle" id="endDate"  type="date"> </tab2>
+            </p>
+            <p class ="leftIndent">
+                How many meters would you like the search radius to be: <tab3> <input class ="inputStyle" id="searchRadius"  value = "400" type="number"> </tab3>
+            </p>
+            <p class="leftIndent">
+                What community board would you like to filter on: <tab4> <input class ="inputStyle" id="communityBoard"  value = "02 MANHATTAN" type="text"> </tab4>
+            </p>
+            {% csrf_token %}
+            <tab5> <button class = "submit" id = "submitButton" type = "button"> Search </button> </tab5>
+        </div>
+    </body>
+
+
+    <script>
+            $(document).on('click','#submitButton', 
+                function(event){
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/callScript/', // whatever url is aka function that handles fields of data
+                        //dataType: 'json',
+                        data: {
+                            startDate: $('#startDate').val(),
+                            endDate: $('#endDate').val(),
+                            searchRadius: $('#searchRadius').val(),
+                            communityBoard: $('#communityBoard').val(),
+                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                        },
+                        
+                        success: function(event){
+                            window.location = "/callTable/";
+                        }
+                                 
+                    });
+                }
+            );             
+    </script>    
+
+</html>
+
